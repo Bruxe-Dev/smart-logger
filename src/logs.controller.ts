@@ -1,7 +1,9 @@
-import { Controller, Req, Res, Query, Body, Post, Get, Param } from "@nestjs/common";
+import { Controller, Req, Res, Query, Body, Post, Get, Param, Head } from "@nestjs/common";
+import { log } from "console";
 import type { Request } from "express";
+import Log from "types/logs";
 
-let logs = [];
+let logs: Log[] = [];
 let blockedIps = new Set()
 
 @Controller()
@@ -11,5 +13,16 @@ export class LogsController {
         if (blockedIps.has(req.ip)) {
             return { status: 'rejected', message: 'Sorry, But your Ip is blocked' }
         }
+        const newLog = {
+            id: Date.now(),
+            ip: req.ip,
+            method: req.method,
+            url: req.originalUrl,
+            headers: req.headers['user-agent'],
+            timestamp: new Date().toISOString(),
+        };
+
+        logs.push(newLog);
+        return { message: "New Log created successfully", data: newLog }
     }
 }
