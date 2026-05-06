@@ -36,7 +36,12 @@ export class LogsController {
         if (ip) {
             filteredLogs = filteredLogs.filter(l => l.ip === ip)
         }
-
         return filteredLogs;
+    }
+
+    @Get(':id')
+    getLog(@Param('id') id: string) {
+        const log = logs.find(l => l.id === parseInt(id));
+        return log || { message: "Log Not Found" }
     }
 }
