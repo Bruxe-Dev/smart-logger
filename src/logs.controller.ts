@@ -1,5 +1,4 @@
 import { Controller, Req, Res, Query, Body, Post, Get, Param, Head } from "@nestjs/common";
-import { log } from "console";
 import type { Request } from "express";
 import Log from "types/logs";
 
