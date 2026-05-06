@@ -60,4 +60,9 @@ export class LogsController {
         }
     }
 
+    @Post('block')
+    blockIp(@Body('ip') ip: string) {
+        blockedIps.add(ip)
+        return { message: `Ip ${ip} has been blocked successfully` }
+    }
 }
