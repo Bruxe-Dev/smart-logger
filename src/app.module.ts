@@ -8,4 +8,4 @@ import { LogsController } from './logs/logs.controller';
   controllers: [AppController, LogsController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
