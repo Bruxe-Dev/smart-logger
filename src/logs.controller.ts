@@ -44,4 +44,20 @@ export class LogsController {
         const log = logs.find(l => l.id === parseInt(id));
         return log || { message: "Log Not Found" }
     }
+
+    @Get('stats/overview')
+    getStats() {
+        const totalRequests = logs.length;
+        const methodCounts = logs.reduce((acc, log) => {
+            acc[log.method] = (acc[log.method] || 0) + 1;
+            return acc;
+        }, {})
+
+        return {
+            total: totalRequests,
+            byMethod: methodCounts,
+            uniqueIps: new Set(logs.map(l => l.ip)).size
+        }
+    }
+
 }
