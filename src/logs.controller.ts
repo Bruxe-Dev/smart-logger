@@ -6,7 +6,7 @@ import Log from "types/logs";
 let logs: Log[] = [];
 let blockedIps = new Set()
 
-@Controller()
+@Controller('logs')
 export class LogsController {
     @Post('track')
     track(@Req() req: Request) {
