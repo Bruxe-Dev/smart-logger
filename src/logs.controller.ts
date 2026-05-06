@@ -25,4 +25,16 @@ export class LogsController {
         logs.push(newLog);
         return { message: "New Log created successfully", data: newLog }
     }
+
+    @Get()
+    getLogs(@Query('method') method?: string, @Query('ip') ip?: string) {
+        let filteredLogs = logs
+
+        if (method) {
+            filteredLogs = filteredLogs.filter(l => l.method === method.toUpperCase())
+        }
+        if (ip) {
+            filteredLogs = filteredLogs.filter(l => l.ip === ip)
+        }
+    }
 }
