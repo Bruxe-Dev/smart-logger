@@ -11,7 +11,7 @@ export class LogsController {
     @Post('track')
     track(@Req() req: Request) {
         if (blockedIps.has(req.ip)) {
-            return { status: 'rejected', message: 'Sorry, But your Ip is blocked' }
+            return { status: 'rejected', message: 'Sorry, But your Ip is blocked.' }
         }
         const newLog = {
             id: Date.now(),
@@ -36,5 +36,7 @@ export class LogsController {
         if (ip) {
             filteredLogs = filteredLogs.filter(l => l.ip === ip)
         }
+
+        return filteredLogs;
     }
 }
